@@ -16,27 +16,17 @@ export class LayersListComponent implements OnInit {
     
     constructor(private http: Http, private layersService: LayersService) { }
 
-    layers: /*Layer[]*/ L.tileLayer[] = this.layersService.layers;//[];
-    
-    // getLayers(): void {
-    //     this.layersService.getJson()
-    //         .then(layers => {
-    //             this.layers = layers;
-    //             //this.layersService.layers = this.layers;
-    //         });
-    // }
+    layers: L.tileLayer[] = [];
 
     ngOnInit(): void {
-        //this.getLayers();
+        this.layers = this.layersService.layers;
     }
 
     clickLayer(index): void {
-        console.log(this.layersService.map);
         this.layersService.changeOpacity(index);
     }
 
     delete(index): void {
-        //this.layers.splice(index,1);
-        //this.layersService.layers = this.layers;
+        this.layersService.delete(index);
     }
 }

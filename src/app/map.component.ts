@@ -25,7 +25,6 @@ export class MapComponent implements OnInit {
     ngOnInit() {
         //const mymap = L.map('map', {layers: this.layersService.layers}).setView([51.505, -0.09], 1);
         this.layersService.initMap('map');
-        console.log(this.layersService.map);
         // this.layersService.getJson()
         //     .then(/*layers*/() => {
         //         console.log(this.layersService.layers);
@@ -38,8 +37,4 @@ export class MapComponent implements OnInit {
         //         //console.log(this.layersService.layers['Здания']);
         //     });
     }
-
-    // ngOnInit() {
-    //     this.initMap();
-    // }
 }

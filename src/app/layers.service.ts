@@ -9,7 +9,7 @@ import { Layer } from './layer';
 export class LayersService {
 
     public map: L.map;
-    public layers: /*L.tileLayer{}*/ any = [
+    public layers: L.tileLayer[] = [];/*L.tileLayer{} any = [
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { 
             title: 'OSM',
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -29,50 +29,65 @@ export class LayersService {
             transparent: true,
             opacity: 1,
             format: 'image/png',
-            title: "ООПТ"
+            title: 'ООПТ'
         })
-    ];
+    ];*/
     constructor(private http: Http) { }
 
-    // getJson(): Promise<Layer[]> {
-    //     return this.http.get("../assets/layers.json")
-    //         .toPromise()
-    //         .then(response => {
-    //             response.json().map((layer) => this.addToMap(layer));
-    //             return response.json() as Layer[];
-    //         });
-    // }
+    getJson(): Promise<Layer[]> {
+        return this.http.get("../assets/layers.json")
+            .toPromise()
+            .then(response => {
+                //response.json().map((layer) => this.addToMap(layer));
+                return response.json() as Layer[];
+            });
+    }
 
-    // addToMap(layer: Layer): void {
-    //     var currentLayer;
-    //     if (layer.type === 'wms') {
-    //         currentLayer =  L.tileLayer.wms(layer.url, {
-    //             layers: layer.layers,
-    //             transparent: true,
-    //             opacity: 1,
-    //             format: 'image/png'
-    //         });
-    //     }
-    //     else {
-    //         currentLayer = L.tileLayer(layer.url, {
-    //             transparent: true,
-    //             opacity: 1,
-    //         });
-    //     }
-    //     this.layers[layer.title] = currentLayer;
-    //     //currentLayer.addTo(this.map);
-    // }
+    addToMap(layer: Layer): void {
+        let currentLayer;
+        if (layer.type === 'wms') {
+            currentLayer =  L.tileLayer.wms(layer.url, {
+                layers: layer.layers,
+                title: layer.title,
+                transparent: true,
+                opacity: 1,
+                format: 'image/png'
+            });
+        }
+        else {
+            currentLayer = L.tileLayer(layer.url, {
+                transparent: true,
+                title: layer.title,
+                opacity: 1,
+            });
+        }
+        this.layers.push(currentLayer);
+        //currentLayer.addTo(this.map);
+    }
+
     public initMap(element) {
-        this.map = L.map(element, {layers: this.layers}).setView([51.505, -0.09], 1);
+        this.getJson()
+            .then(layersArr => {
+                this.layers.push(L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { 
+                    title: 'OSM',
+                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                }));
+                layersArr.map((layer: Layer) => this.addToMap(layer));
+                this.map = L.map(element, {layers: this.layers}).setView([51.505, -0.09], 1);
+            });
+        //this.map = L.map(element, {layers: this.layers}).setView([51.505, -0.09], 1);
     }
 
     public changeOpacity (index) {
-        console.log(this.layers[index]);
-        //this.layers[index].remove();
-        this.map.removeLayer(this.layers[index]);
-        //this.layers[index].setOpacity(0);
+        if (this.map.hasLayer(this.layers[index])){
+            this.map.removeLayer(this.layers[index]);
+        }
+        else {
+            this.map.addLayer(this.layers[index]);
+        }
     }
     public delete(index) {
-        //this.layers.splice(index, 1);
+        this.map.removeLayer(this.layers[index]);
+        this.layers.splice(index, 1);
     }
 }
