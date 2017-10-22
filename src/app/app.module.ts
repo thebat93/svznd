@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { LayersService } from './layers.service';
 
 import "leaflet";
 
@@ -18,7 +19,7 @@ import { LayersListComponent } from './layers-list.component';
     BrowserModule,
     HttpModule
   ],
-  providers: [],
+  providers: [LayersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

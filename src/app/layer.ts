@@ -3,4 +3,5 @@ export class Layer {
     layers: string;
     type: string;
     url: string;
+    opacity: number;
   }
