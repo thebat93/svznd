@@ -10,6 +10,7 @@ import { Layer } from './layer';
     templateUrl: './layers-list.component.html',
     styles: [`
         .clicked { color: grey }
+        .layer { cursor: pointer }
     `]
     //providers: [LayersService]
   })
