@@ -18,14 +18,32 @@ export class NewLayerComponent implements OnInit {
     myForm: FormGroup;
     layerType: string;
 
+    formGroupWMS = new FormGroup({
+        'title': new FormControl('', Validators.required),
+        'type': new FormControl('wms', Validators.required),
+        'url': new FormControl('', Validators.required),
+        'layers': new FormControl('', Validators.required),//нужно убирать в зависимости от типа
+        'visibility': new FormControl(true),
+    });
+    formGroupTMS = new FormGroup({
+        'title': new FormControl('', Validators.required),
+        'type': new FormControl('wms', Validators.required),
+        'url': new FormControl('', Validators.required),
+        'visibility': new FormControl(true),
+    });
+
+    changeValidators(){
+        if(this.layerType === 'tms'){
+            this.myForm = this.formGroupTMS;
+        }
+        else {
+            this.myForm = this.formGroupWMS;
+        }
+        
+    }
+
     ngOnInit(): void {
-        this.myForm = new FormGroup({
-            'title': new FormControl('', Validators.required),
-            'type': new FormControl('wms', Validators.required),
-            'url': new FormControl('', Validators.required),
-            'layers': new FormControl('', Validators.required),//нужно убирать в зависимости от типа
-            'visibility': new FormControl(true),
-        });
+        this.myForm = this.formGroupWMS;
     }
 
     register (myForm: NgForm) {

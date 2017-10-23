@@ -65,7 +65,7 @@ export class LayersService {
             });
         }
         this.layers.push(currentLayer);
-        if(layer.hasOwnProperty('newlayer')){
+        if(currentLayer.visibility==true){
             console.log(currentLayer);
             currentLayer.addTo(this.map);
         }
