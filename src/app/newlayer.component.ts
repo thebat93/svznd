@@ -23,7 +23,7 @@ export class NewLayerComponent implements OnInit {
             'title': new FormControl('', Validators.required),
             'type': new FormControl('wms', Validators.required),
             'url': new FormControl('', Validators.required),
-            'layers': new FormControl('', Validators.required),
+            'layers': new FormControl('', Validators.required),//нужно убирать в зависимости от типа
             'visibility': new FormControl(true),
         });
     }
