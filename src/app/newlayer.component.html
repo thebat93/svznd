@@ -7,16 +7,16 @@
         </p>
         <p>
             <label for="type">Тип слоя</label>
-            <select id="type" name="type" formControlName="type" #type>
-                <option>WMS</option>
-                <option>TMS</option>
+            <select [(ngModel)]="layerType" id="type" name="type" formControlName="type" #type>
+                <option>wms</option> 
+                <option>tms</option>
             </select>
-        </p>    
+        </p>   
         <p>
             <label for="url">URL</label>
             <input type="text" class="form-control" id="url" name="url"  formControlName="url">
         </p>
-        <p *ngIf="type.value=='WMS'">
+        <p *ngIf="type.value=='wms'">
             <label for="layers">Layers (WMS)</label>
             <input type="text" class="form-control" id="layers" name="layers"  formControlName="layers">
         </p>

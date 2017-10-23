@@ -15,13 +15,13 @@ export class NewLayerComponent implements OnInit {
     
     constructor(private layersService: LayersService, private authService: AuthService, private fb: FormBuilder) { }
     showForm: boolean = false;
-    newLayer: Layer;
     myForm: FormGroup;
-    
+    layerType: string;
+
     ngOnInit(): void {
         this.myForm = new FormGroup({
             'title': new FormControl('', Validators.required),
-            'type': new FormControl('WMS', Validators.required),
+            'type': new FormControl('wms', Validators.required),
             'url': new FormControl('', Validators.required),
             'layers': new FormControl('', Validators.required),
             'visibility': new FormControl(true),
@@ -29,8 +29,23 @@ export class NewLayerComponent implements OnInit {
     }
 
     register (myForm: NgForm) {
-        console.log('Successful registration');
-        //if(this.myForm!=null)
         console.log(myForm.value);
+
+        if(this.myForm.status=='VALID'){
+            const formModel = this.myForm.value;
+            const saveLayer: Layer = {
+                title: formModel.title as string,
+                layers: formModel.layers as string,
+                type: formModel.type as string,
+                url: formModel.url as string,
+                visibility: formModel.visibility as boolean,
+                newlayer: true
+            }
+            console.log(saveLayer);
+            this.layersService.addToMap(saveLayer);
+        }
+        else {
+            alert("заполните все поля!");
+        }
       }
 }

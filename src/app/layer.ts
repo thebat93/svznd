@@ -3,7 +3,6 @@ export class Layer {
     layers: string;
     type: string;
     url: string;
-    opacity: number;
     visibility: boolean;
     newlayer: boolean;
   }

@@ -66,6 +66,7 @@ export class LayersService {
         }
         this.layers.push(currentLayer);
         if(layer.hasOwnProperty('newlayer')){
+            console.log(currentLayer);
             currentLayer.addTo(this.map);
         }
     }
@@ -78,6 +79,7 @@ export class LayersService {
                     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 }));
                 layersArr.map((layer: Layer) => this.addToMap(layer));
+                console.log(this.layers);
                 this.map = L.map(element, {layers: this.layers}).setView([51.505, -0.09], 1);
             });
         //this.map = L.map(element, {layers: this.layers}).setView([51.505, -0.09], 1);
