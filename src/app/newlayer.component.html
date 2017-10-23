@@ -7,7 +7,7 @@
         </p>
         <p>
             <label for="type">Тип слоя</label>
-            <select [(ngModel)]="layerType" id="type" name="type" formControlName="type" #type>
+            <select [(ngModel)]="layerType" (change)="typeChange()" id="type" name="type" formControlName="type" #type>
                 <option>wms</option> 
                 <option>tms</option>
             </select>

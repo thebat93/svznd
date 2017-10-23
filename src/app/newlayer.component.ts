@@ -18,32 +18,26 @@ export class NewLayerComponent implements OnInit {
     myForm: FormGroup;
     layerType: string;
 
-    formGroupWMS = new FormGroup({
-        'title': new FormControl('', Validators.required),
-        'type': new FormControl('wms', Validators.required),
-        'url': new FormControl('', Validators.required),
-        'layers': new FormControl('', Validators.required),//нужно убирать в зависимости от типа
-        'visibility': new FormControl(true),
-    });
-    formGroupTMS = new FormGroup({
-        'title': new FormControl('', Validators.required),
-        'type': new FormControl('wms', Validators.required),
-        'url': new FormControl('', Validators.required),
-        'visibility': new FormControl(true),
-    });
-
-    changeValidators(){
-        if(this.layerType === 'tms'){
-            this.myForm = this.formGroupTMS;
-        }
-        else {
-            this.myForm = this.formGroupWMS;
-        }
-        
+    ngOnInit(): void {
+        this.myForm = this.fb.group({
+            'title': ['', Validators.required],
+            'type': ['wms', Validators.required],
+            'url': ['', Validators.required],
+            'layers': ['', Validators.required],//нужно убирать в зависимости от типа
+            'visibility': [true],
+        });
+        console.log(this.myForm.controls);
     }
 
-    ngOnInit(): void {
-        this.myForm = this.formGroupWMS;
+    private typeChange() {
+        if(this.layerType === 'tms'){
+            this.myForm.controls['layers'].clearValidators();
+            this.myForm.controls['layers'].updateValueAndValidity();
+        }
+        else {
+            this.myForm.controls['layers'].setValidators(Validators.required);
+            this.myForm.controls['layers'].updateValueAndValidity();
+        }
     }
 
     register (myForm: NgForm) {
