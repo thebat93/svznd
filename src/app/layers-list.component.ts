@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LayersService } from './layers.service';
+import { AuthService } from './auth.service';
 
 import * as L from "leaflet";
 import { Layer } from './layer';
@@ -15,7 +16,7 @@ import { Layer } from './layer';
 
 export class LayersListComponent implements OnInit {
     
-    constructor(private layersService: LayersService) { }
+    constructor(private layersService: LayersService, private authService: AuthService) { }
 
     layers: L.tileLayer[] = [];
 

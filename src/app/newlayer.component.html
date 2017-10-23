@@ -1,0 +1,31 @@
+<div>
+    <button (click)="showForm=true" *ngIf="this.authService.authorized && !showForm">Добавить новый</button>
+    <form *ngIf="showForm" [formGroup]="myForm" (ngSubmit)="register(myForm)" novalidate>
+        <p>
+            <label for="title">Наименование</label>
+            <input type="text" class="form-control" id="title" name="title" formControlName="title">
+        </p>
+        <p>
+            <label for="type">Тип слоя</label>
+            <select id="type" name="type" formControlName="type" #type>
+                <option>WMS</option>
+                <option>TMS</option>
+            </select>
+        </p>    
+        <p>
+            <label for="url">URL</label>
+            <input type="text" class="form-control" id="url" name="url"  formControlName="url">
+        </p>
+        <p *ngIf="type.value=='WMS'">
+            <label for="layers">Layers (WMS)</label>
+            <input type="text" class="form-control" id="layers" name="layers"  formControlName="layers">
+        </p>
+        <p>
+            <label for="visibility">Видимость</label>
+            <input type="checkbox" class="form-control" id="visibility" name="visibility" checked formControlName="visibility">
+        </p>
+        <pre>{{myForm.value | json}}</pre>
+        <p>Form status: {{ myForm.status | json }}</p>
+        <button type="submit">Добавить</button>
+    </form>
+</div>

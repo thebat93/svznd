@@ -9,9 +9,10 @@ import { Layer } from './layer';
   styles: [
     `  
     #map {
-        position:absolute;
-        top:100px;
-        bottom:0;
+        position:relative;
+        margin-top:10px;
+        margin-bottom:10px;
+        height: 500px;
         width:100%;
     }
     `

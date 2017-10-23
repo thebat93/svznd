@@ -44,13 +44,16 @@ export class LayersService {
     }
 
     addToMap(layer: Layer): void {
-        let currentLayer;
+        let currentLayer, visibility = true;
+        if(layer.hasOwnProperty('visibility')){
+            visibility = layer.visibility;
+        }
         if (layer.type === 'wms') {
             currentLayer =  L.tileLayer.wms(layer.url, {
                 layers: layer.layers,
                 title: layer.title,
                 transparent: true,
-                opacity: 1,
+                visibility: visibility,
                 format: 'image/png'
             });
         }
@@ -58,11 +61,13 @@ export class LayersService {
             currentLayer = L.tileLayer(layer.url, {
                 transparent: true,
                 title: layer.title,
-                opacity: 1,
+                visibility: visibility,
             });
         }
         this.layers.push(currentLayer);
-        //currentLayer.addTo(this.map);
+        if(layer.hasOwnProperty('newlayer')){
+            currentLayer.addTo(this.map);
+        }
     }
 
     public initMap(element) {

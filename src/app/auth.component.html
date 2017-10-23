@@ -1,11 +1,11 @@
 <div>
-    <button (click)="showForm=true" *ngIf="!showForm">Открыть форму входа</button>
-    <!-- <button (click)="showForm=true">Выйти</button> -->
+    <button (click)="showForm=true" *ngIf="!showForm && !authorized">Открыть форму входа</button>
+    <button (click)="logout()" *ngIf="authorized">Выйти</button>
     <div *ngIf="showForm">
         <label for="login">Введите логин</label>
-        <input (ngModel)="login" type="text" class="form-control" id="login">
+        <input [(ngModel)]="login" type="text" class="form-control" id="login" required>
         <label for="pass">Введите пароль</label>
-        <input (ngModel)="pass" type="password" class="form-control" id="pass">
-        <button (click)="authenticate">Войти</button>
+        <input [(ngModel)]="pass" type="password" class="form-control" id="pass" required>
+        <button (click)="authenticate()">Войти</button>
     </div>
 </div>

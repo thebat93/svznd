@@ -6,6 +6,8 @@ export class AuthService {
     public authorize(login, password): boolean {
         if(login === 'admin' && password === 'test'){
             this.authorized = true;
+            return true;
         }
+        else return false;
     }
 }
