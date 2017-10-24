@@ -17,7 +17,7 @@ export class NewLayerComponent implements OnInit {
     showForm: boolean = false;
     myForm: FormGroup;
     layerType: string;
-
+    
     ngOnInit(): void {
         this.myForm = this.fb.group({
             'title': ['', Validators.required],
@@ -60,7 +60,6 @@ export class NewLayerComponent implements OnInit {
                     visibility: formModel.visibility as boolean,
                     newlayer: true
                 }
-                console.log(saveLayer);
                 this.layersService.addToMap(saveLayer);
             }
         }

@@ -1,6 +1,6 @@
 <div>
     <button (click)="showForm=true" *ngIf="this.authService.authorized && !showForm">Добавить новый</button>
-    <form *ngIf="showForm" [formGroup]="myForm" (ngSubmit)="register(myForm)" novalidate>
+    <form *ngIf="showForm && this.authService.authorized" [formGroup]="myForm" (ngSubmit)="register(myForm)" novalidate>
         <p>
             <label for="title">Наименование</label>
             <input type="text" class="form-control" id="title" name="title" formControlName="title">
@@ -25,6 +25,7 @@
             <input type="checkbox" class="form-control" id="visibility" name="visibility" checked formControlName="visibility">
         </p>
         <pre>{{myForm.value | json}}</pre>
+        <pre>{{myForm.controls['title'].valid}}</pre>
         <p>Form status: {{ myForm.status | json }}</p>
         <button type="submit">Добавить</button>
     </form>
