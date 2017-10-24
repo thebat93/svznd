@@ -59,4 +59,5 @@ export class AppPage {
     const layerSpan = this.getLayerSpan(layer);
     return layerSpan.getAttribute('class');
   }
+  
 }
