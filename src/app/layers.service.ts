@@ -50,7 +50,7 @@ export class LayersService {
     public initMap(element) {
         this.getJson()
             .then(layersArr => {
-                this.layers.push(L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { 
+                this.layers.push(L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                     title: 'OSM',
                     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 }));
@@ -60,7 +60,7 @@ export class LayersService {
     }
 
     public changeOpacity (index) {
-        if (this.map.hasLayer(this.layers[index])){
+        if (this.map.hasLayer(this.layers[index])) {
             this.map.removeLayer(this.layers[index]);
         }
         else {

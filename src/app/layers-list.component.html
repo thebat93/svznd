@@ -1,5 +1,5 @@
 <div>
-    <ul>
+    <ul class="layers-list">
         <li *ngFor="let layer of layers; let i=index">
             <span class="layer" [class.clicked]="!this.layersService.map.hasLayer(this.layersService.layers[i])" (click)="clickLayer(i)">{{ layer.options.title }} </span><button (click)="delete(i)" *ngIf="this.authService.authorized">удалить</button>
         </li>
