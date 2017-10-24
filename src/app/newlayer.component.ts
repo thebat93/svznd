@@ -23,14 +23,13 @@ export class NewLayerComponent implements OnInit {
             'title': ['', Validators.required],
             'type': ['wms', Validators.required],
             'url': ['', Validators.required],
-            'layers': ['', Validators.required],//нужно убирать в зависимости от типа
+            'layers': ['', Validators.required],
             'visibility': [true],
         });
-        console.log(this.myForm.controls);
     }
 
-    private typeChange() {
-        if(this.layerType === 'tms'){
+    private typeChange(): void {
+        if (this.layerType === 'tms') {
             this.myForm.controls['layers'].clearValidators();
             this.myForm.controls['layers'].updateValueAndValidity();
         }
@@ -40,18 +39,17 @@ export class NewLayerComponent implements OnInit {
         }
     }
 
-    register (myForm: NgForm) {
-        console.log(myForm.value);
+    register (myForm: NgForm): void {
         let sameName = false;
-        if(this.myForm.status=='VALID'){
+        if (this.myForm.status === 'VALID') {
             const formModel = this.myForm.value;
             this.layersService.layers.map(layer => {
-                if(layer.options.title === formModel.title){
+                if (layer.options.title === formModel.title) {
                     sameName = true;
                     alert("Введите уникальное имя");
                 }
             });
-            if(sameName === false){
+            if (sameName === false) {
                 const saveLayer: Layer = {
                     title: formModel.title as string,
                     layers: formModel.layers as string,
@@ -59,12 +57,12 @@ export class NewLayerComponent implements OnInit {
                     url: formModel.url as string,
                     visibility: formModel.visibility as boolean,
                     newlayer: true
-                }
+                };
                 this.layersService.addToMap(saveLayer);
             }
         }
         else {
-            alert("заполните все поля!");
+            alert('Заполните все поля!');
         }
       }
 }

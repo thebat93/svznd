@@ -12,7 +12,6 @@ import { Layer } from './layer';
         .clicked { color: grey }
         .layer { cursor: pointer }
     `]
-    //providers: [LayersService]
   })
 
 export class LayersListComponent implements OnInit {

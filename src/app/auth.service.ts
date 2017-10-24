@@ -8,6 +8,6 @@ export class AuthService {
             this.authorized = true;
             return true;
         }
-        else return false;
+        else { return false; }
     }
 }

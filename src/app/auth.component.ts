@@ -3,8 +3,7 @@ import { AuthService } from './auth.service';
 
 @Component({
     selector: 'my-auth',
-    templateUrl: './auth.component.html',
-    //providers: [LayersService]
+    templateUrl: './auth.component.html'
   })
 
 export class AuthComponent {
@@ -16,7 +15,7 @@ export class AuthComponent {
     pass: string = '';
     authorized: boolean = false;
     
-    authenticate() {
+    authenticate(): void {
         this.authorized = this.authService.authorize(this.login, this.pass);
         if(this.authorized){
             this.showForm = false;
@@ -24,7 +23,7 @@ export class AuthComponent {
         else { alert("Неправильно введен логин или пароль"); }
     }
 
-    logout(){
+    logout(): void {
         this.authService.authorized = false;
         this.authorized = false;
     }
